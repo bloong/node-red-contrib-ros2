@@ -1,0 +1,128 @@
+<script type="text/javascript">
+    RED.nodes.registerType('ros2-in', {
+        category: 'input',
+        color: '#a6bbcf',
+        defaults: {
+            name: { value: '' },
+            topic: { value: '', required: true },
+            msgtype: { value: 'std_msgs/msg/String', required: true },
+            qos: { value: 0 }
+        },
+        inputs: 0,
+        outputs: 1,
+        icon: 'icons/ros-in.svg',
+        label: function() {
+            return this.name || 'ros2-in';
+        },
+        labelStyle: function() {
+            return this.name ? 'node_label_italic' : '';
+        },
+        paletteLabel: 'ros2 in'
+    });
+
+    RED.nodes.registerType('ros2-out', {
+        category: 'output',
+        color: '#a6bbcf',
+        defaults: {
+            name: { value: '' },
+            topic: { value: '', required: true },
+            msgtype: { value: 'std_msgs/msg/String', required: true },
+            qos: { value: 0 }
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: 'icons/ros-out.svg',
+        label: function() {
+            return this.name || 'ros2-out';
+        },
+        labelStyle: function() {
+            return this.name ? 'node_label_italic' : '';
+        },
+        paletteLabel: 'ros2 out'
+    });
+</script>
+
+<script type="text/html" data-template-name="ros2-in">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-topic"><i class="fa fa-comment"></i> Topic <span class="red-ui-required">*</span></label>
+        <input type="text" id="node-input-topic" placeholder="e.g. /chatter">
+    </div>
+    <div class="form-row">
+        <label for="node-input-msgtype"><i class="fa fa-cog"></i> Message Type <span class="red-ui-required">*</span></label>
+        <input type="text" id="node-input-msgtype" placeholder="e.g. std_msgs/msg/String">
+    </div>
+    <div class="form-row">
+        <label for="node-input-qos"><i class="fa fa-signal"></i> QoS Policy</label>
+        <select id="node-input-qos">
+            <option value="0">System Default</option>
+            <option value="1">Reliable</option>
+            <option value="2">Best Effort</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" data-template-name="ros2-out">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-topic"><i class="fa fa-comment"></i> Topic <span class="red-ui-required">*</span></label>
+        <input type="text" id="node-input-topic" placeholder="e.g. /node_red">
+    </div>
+    <div class="form-row">
+        <label for="node-input-msgtype"><i class="fa fa-cog"></i> Message Type <span class="red-ui-required">*</span></label>
+        <input type="text" id="node-input-msgtype" placeholder="e.g. std_msgs/msg/String">
+    </div>
+    <div class="form-row">
+        <label for="node-input-qos"><i class="fa fa-signal"></i> QoS Policy</label>
+        <select id="node-input-qos">
+            <option value="0">System Default</option>
+            <option value="1">Reliable</option>
+            <option value="2">Best Effort</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="ros2-in">
+    <p>Subscribes to a ROS2 topic. When a message is received, it is output as a Node-RED message.</p>
+    <h3>Inputs</h3>
+    <p>None</p>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">object</span>
+        </dt>
+        <dd>The ROS2 message payload</dd>
+        <dt>topic
+            <span class="property-type">string</span>
+        </dt>
+        <dd>The topic the message was received on</dd>
+    </dl>
+    <h3>Details</h3>
+    <p><b>Topic</b>: ROS2 topic to subscribe to (e.g. /chatter)</p>
+    <p><b>Message Type</b>: ROS2 message type in the format <code>package_name/msg/TypeName</code></p>
+    <p><b>QoS</b>: Quality of Service policy for the subscription</p>
+</script>
+
+<script type="text/html" data-help-name="ros2-out">
+    <p>Publishes messages to a ROS2 topic.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">object | string | number</span>
+        </dt>
+        <dd>The message content to publish. Can be an object matching the ROS2 message structure or a primitive value.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <p>None</p>
+    <h3>Details</h3>
+    <p><b>Topic</b>: ROS2 topic to publish to (e.g. /node_red)</p>
+    <p><b>Message Type</b>: ROS2 message type in the format <code>package_name/msg/TypeName</code></p>
+    <p><b>QoS</b>: Quality of Service policy for the publisher</p>
+    <p>Messages received before the publisher is fully initialized will be queued.</p>
+</script>
