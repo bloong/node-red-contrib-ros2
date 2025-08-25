@@ -2,16 +2,36 @@
  node-red-contrib-ros2
 =================
 安装方式：
-在node-red目录下安装
+
+激活ros2环境
+```
+ub2204@ub2204:~$ source /opt/ros/humble/local_setup.sh
+```
+
+安装rclnodejs
+```
+ub2204@ub2204:~/.node-red$ npm install rclnodejs
+```
+ 
+1、使用npm安装node-red(一定使用npm安装)
+2、clone代码到~/.node-red的目录下
+```
+ub2204@ub2204:~/.node-red$ git clone git@github.com:bloong/node-red-contrib-ros2.git
+ub2204@ub2204:~/.node-red$ ls
+flows.json  lib  node_modules  node-red-contrib-ros2  package.json  package-lock.json  settings.js
+```
+3、在node-red-contrib-ros2目录下执行npm install
+```
+ub2204@ub2204:~/.node-red/node-red-contrib-ros2$ npm install
+```
+4、在node-red目录下安装
 ```
 ub2204@ub2204:~/.node-red$ npm install node-red-contrib-ros2
 ```
-
-或者全局安装
+5、或者全局安装
 ```
 ub2204@ub2204:~/.node-red$ sudo npm install -g node-red-contrib-ros2
 ```
-
 
  流程文件导入
 
